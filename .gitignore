@@ -1,0 +1,33 @@
+# Python 环境与缓存
+.venv/
+**/.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# 运行输出、日志与本地缓存
+/runs/
+/tmp/
+/logs/
+*.log
+*.whl
+*.zip
+~$*
+*.tmp
+*.bak
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# 上游原始包的完整副本不入库：仓库只提供运行所需的两个工作簿与四份派生CSV。
+# 需要重做完整来源核验时按 03-数据/协作数据说明.md 下载，解压位置保持原目录结构。
+/03-数据/SMT2020-official/SMT2020.zip
+/03-数据/SMT2020-official/extracted/**/*.docx
+/03-数据/SMAT2022/*.docx

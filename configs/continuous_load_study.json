@@ -1,0 +1,34 @@
+{
+  "name": "continuous-load-v5",
+  "seed": 20261004,
+  "warmup_days": 160,
+  "end_days": 240,
+  "representative_case": "continuous_high_6",
+  "cases": [
+    {
+      "name": "continuous_low_3",
+      "config": "configs/continuous_low_3.json",
+      "interval_days": 4,
+      "vehicles": 3
+    },
+    {
+      "name": "continuous_low_6",
+      "config": "configs/continuous_low_6.json",
+      "interval_days": 4,
+      "vehicles": 6
+    },
+    {
+      "name": "continuous_high_3",
+      "config": "configs/continuous_high_3.json",
+      "interval_days": 2,
+      "vehicles": 3
+    },
+    {
+      "name": "continuous_high_6",
+      "config": "configs/continuous_high_6.json",
+      "interval_days": 2,
+      "vehicles": 6
+    }
+  ],
+  "scope": "受控混流投片与规则基线的有限观察，非稳态证明"
+}

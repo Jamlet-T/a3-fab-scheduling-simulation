@@ -1,0 +1,257 @@
+{
+  "name": "performance_exact_6v_1d",
+  "seed": 20261004,
+  "full_route": true,
+  "step_s": 0.2,
+  "frame_interval_s": 300,
+  "motion_interval_s": 0.2,
+  "motion_chunk_s": 600,
+  "max_time_s": 86400,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3,
+    "port_stop_tolerance_m": 0.1
+  },
+  "traffic": {
+    "use_route_ids": true,
+    "fit_native_stops": true,
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2,
+    "stall_timeout_s": 300,
+    "local_stall_timeout_s": 3600
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    },
+    {
+      "source_id": "SMT_oht_3"
+    },
+    {
+      "source_id": "SMT_oht_4"
+    },
+    {
+      "source_id": "SMT_oht_5"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 12,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "batch_policy": "queue_batch"
+  },
+  "assumptions": [
+    "性能诊断首日观察切片，来源本地既有prof10d.json；保留原投片定义、路线、步长、车辆与规则，只观察前1日，期末保留WIP。",
+    "短窗口处于启动阶段，不代表完整工厂负载，不可外推长期耗时或算法排序。",
+    "delay档（若启用）不包含拥堵、区域控制与安全间距，不能支持运输调度结论。",
+    "合成投片流先按原10日配置展开为显式lots，再截取首日观察，保持lot ID与释放时间，避免投片节拍长于观察窗的入口限制。"
+  ],
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 86400
+  },
+  "replay": {
+    "enabled": false
+  },
+  "performance": {
+    "stream_events": true,
+    "route_event_geometry": false,
+    "compact_json": true
+  },
+  "lots": [
+    {
+      "id": "Route_Product_1-00000",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00001",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00002",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00003",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00004",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00005",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00006",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00007",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00008",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00009",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00010",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00011",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00000",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00001",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00002",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00003",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00004",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00005",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00006",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00007",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00008",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00009",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00010",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_2-00011",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 0
+    },
+    {
+      "id": "Route_Product_1-00012",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 172800.0
+    },
+    {
+      "id": "Route_Product_2-00012",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 345600.0
+    },
+    {
+      "id": "Route_Product_1-00013",
+      "route": "Route_Product_1",
+      "wafer_count": 25,
+      "release_s": 518400.0
+    },
+    {
+      "id": "Route_Product_2-00013",
+      "route": "Route_Product_2",
+      "wafer_count": 25,
+      "release_s": 691200.0
+    }
+  ]
+}

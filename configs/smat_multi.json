@@ -1,0 +1,35 @@
+{
+  "name": "smat-three-oht-rules",
+  "step_s": 0.1,
+  "max_time_s": 1800,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "processing_s": {"A": 5, "B": 4, "C": 5, "D": 4},
+  "network": {
+    "type": "smat2022", "vehicle_id": "SMT_oht_0", "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {"length_m": 0.784, "min_gap_m": 0.125, "max_speed_m_s": 1.5, "accel_m_s2": 2, "decel_m_s2": 3},
+  "traffic": {"lookahead_m": 8, "stop_margin_m": 0.2, "junction_clearance_m": 2},
+  "vehicles": [{"source_id": "SMT_oht_0"}, {"source_id": "SMT_oht_1"}, {"source_id": "SMT_oht_2"}],
+  "ports": {
+    "A": {"source_id": "DIF0138_Port1"}, "C": {"source_id": "DIF0138_Port2"},
+    "B": {"source_id": "ECH0578_Port1"}, "D": {"source_id": "ECH0578_Port2"}
+  },
+  "tasks": [
+    {"id": "task0", "lot_id": "lot0", "source": "A", "target": "B", "release_s": 0},
+    {"id": "task1", "lot_id": "lot1", "source": "C", "target": "D", "release_s": 0},
+    {"id": "task2", "lot_id": "lot2", "source": "A", "target": "B", "release_s": 8},
+    {"id": "task3", "lot_id": "lot3", "source": "C", "target": "B", "release_s": 15}
+  ],
+  "assumptions": [
+    "全量真实路网，选定三辆源车辆、四个lot；两个设备的多端口共用各自容量1的演示机台。",
+    "工序顺序与原型一致，加工为5/4秒演示耗时，没有完整基准生产语义。",
+    "等待最久的可派任务优先，选择有向距离最近的空闲车；目标端口预留至实际收货并进入机台。",
+    "源ZCU的STOP至同区RESET沿实际路径构成独占段，车尾清出后释放；未覆盖合流节点补充独占段。",
+    "FIFO请求，同轨道前车优先；未授权时使用原生停车点等待，不瞬移、不删车。",
+    "空闲车辆沿最短有向回路巡行，巡行也遵守区域控制。",
+    "源空间按毫米转米，951条曲轨用端点弦线；未实现方向兼容、动态绕行或通用死锁消解。",
+    "运输时间未物理校准，不能把三车场景验证说成500车完整基准验证。"
+  ]
+}

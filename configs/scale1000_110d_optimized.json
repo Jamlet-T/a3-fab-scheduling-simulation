@@ -1,0 +1,227 @@
+{
+  "name": "scale1000_110d_optimized",
+  "seed": 20261003,
+  "full_route": true,
+  "step_s": 0.1,
+  "frame_interval_s": 30,
+  "motion_interval_s": 0.1,
+  "motion_chunk_s": 600,
+  "max_time_s": 9504000,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3
+  },
+  "traffic": {
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    },
+    {
+      "source_id": "SMT_oht_3"
+    },
+    {
+      "source_id": "SMT_oht_4"
+    },
+    {
+      "source_id": "SMT_oht_5"
+    },
+    {
+      "source_id": "SMT_oht_6"
+    },
+    {
+      "source_id": "SMT_oht_7"
+    },
+    {
+      "source_id": "SMT_oht_8"
+    },
+    {
+      "source_id": "SMT_oht_9"
+    },
+    {
+      "source_id": "SMT_oht_10"
+    },
+    {
+      "source_id": "SMT_oht_11"
+    },
+    {
+      "source_id": "SMT_oht_12"
+    },
+    {
+      "source_id": "SMT_oht_13"
+    },
+    {
+      "source_id": "SMT_oht_14"
+    },
+    {
+      "source_id": "SMT_oht_15"
+    },
+    {
+      "source_id": "SMT_oht_16"
+    },
+    {
+      "source_id": "SMT_oht_17"
+    },
+    {
+      "source_id": "SMT_oht_18"
+    },
+    {
+      "source_id": "SMT_oht_19"
+    },
+    {
+      "source_id": "SMT_oht_20"
+    },
+    {
+      "source_id": "SMT_oht_21"
+    },
+    {
+      "source_id": "SMT_oht_22"
+    },
+    {
+      "source_id": "SMT_oht_23"
+    },
+    {
+      "source_id": "SMT_oht_24"
+    },
+    {
+      "source_id": "SMT_oht_25"
+    },
+    {
+      "source_id": "SMT_oht_26"
+    },
+    {
+      "source_id": "SMT_oht_27"
+    },
+    {
+      "source_id": "SMT_oht_28"
+    },
+    {
+      "source_id": "SMT_oht_29"
+    },
+    {
+      "source_id": "SMT_oht_30"
+    },
+    {
+      "source_id": "SMT_oht_31"
+    },
+    {
+      "source_id": "SMT_oht_32"
+    },
+    {
+      "source_id": "SMT_oht_33"
+    },
+    {
+      "source_id": "SMT_oht_34"
+    },
+    {
+      "source_id": "SMT_oht_35"
+    },
+    {
+      "source_id": "SMT_oht_36"
+    },
+    {
+      "source_id": "SMT_oht_37"
+    },
+    {
+      "source_id": "SMT_oht_38"
+    },
+    {
+      "source_id": "SMT_oht_39"
+    },
+    {
+      "source_id": "SMT_oht_40"
+    },
+    {
+      "source_id": "SMT_oht_41"
+    },
+    {
+      "source_id": "SMT_oht_42"
+    },
+    {
+      "source_id": "SMT_oht_43"
+    },
+    {
+      "source_id": "SMT_oht_44"
+    },
+    {
+      "source_id": "SMT_oht_45"
+    },
+    {
+      "source_id": "SMT_oht_46"
+    },
+    {
+      "source_id": "SMT_oht_47"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2",
+      "Route_Product_3",
+      "Route_Product_4"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 24,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "dispatch_mode": "deferred"
+  },
+  "assumptions": [
+    "完整规模性能场景：真实释放日历前45日、Product_1至4、1035个lot，观察110日，期末保留WIP。",
+    "delay模型没有轨道位置、区域控制、拥堵及安全间距，不用于运输调度或安全性结论。",
+    "显式启用delay_event_wakeup；与旧唤醒逐字节对照的统计末位边界见开发记录。",
+    "保留48车、0.1秒网格、deferred、源路线、严格批量和有限输入缓冲，不补造lot。",
+    "完整流式gzip日志，显式level 1固定测量档位；单种子，不构成稳态或规则优劣证明。"
+  ],
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 9504000
+  },
+  "release_calendar": {
+    "products": [
+      "Product_1",
+      "Product_2",
+      "Product_3",
+      "Product_4"
+    ],
+    "start_s": 0,
+    "duration_s": 3888000
+  },
+  "replay": {
+    "enabled": false
+  },
+  "transport": {
+    "model": "delay"
+  },
+  "performance": {
+    "delay_event_wakeup": true,
+    "stream_events": true,
+    "compact_json": true,
+    "route_event_geometry": false,
+    "event_compression": "gzip",
+    "event_compression_level": 1
+  }
+}

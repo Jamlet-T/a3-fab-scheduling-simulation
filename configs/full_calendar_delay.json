@@ -1,0 +1,257 @@
+{
+  "name": "full_calendar_delay",
+  "seed": 20261003,
+  "full_route": true,
+  "step_s": 0.1,
+  "frame_interval_s": 30,
+  "motion_interval_s": 0.1,
+  "motion_chunk_s": 600,
+  "max_time_s": 260236800,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3
+  },
+  "traffic": {
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    },
+    {
+      "source_id": "SMT_oht_3"
+    },
+    {
+      "source_id": "SMT_oht_4"
+    },
+    {
+      "source_id": "SMT_oht_5"
+    },
+    {
+      "source_id": "SMT_oht_6"
+    },
+    {
+      "source_id": "SMT_oht_7"
+    },
+    {
+      "source_id": "SMT_oht_8"
+    },
+    {
+      "source_id": "SMT_oht_9"
+    },
+    {
+      "source_id": "SMT_oht_10"
+    },
+    {
+      "source_id": "SMT_oht_11"
+    },
+    {
+      "source_id": "SMT_oht_12"
+    },
+    {
+      "source_id": "SMT_oht_13"
+    },
+    {
+      "source_id": "SMT_oht_14"
+    },
+    {
+      "source_id": "SMT_oht_15"
+    },
+    {
+      "source_id": "SMT_oht_16"
+    },
+    {
+      "source_id": "SMT_oht_17"
+    },
+    {
+      "source_id": "SMT_oht_18"
+    },
+    {
+      "source_id": "SMT_oht_19"
+    },
+    {
+      "source_id": "SMT_oht_20"
+    },
+    {
+      "source_id": "SMT_oht_21"
+    },
+    {
+      "source_id": "SMT_oht_22"
+    },
+    {
+      "source_id": "SMT_oht_23"
+    },
+    {
+      "source_id": "SMT_oht_24"
+    },
+    {
+      "source_id": "SMT_oht_25"
+    },
+    {
+      "source_id": "SMT_oht_26"
+    },
+    {
+      "source_id": "SMT_oht_27"
+    },
+    {
+      "source_id": "SMT_oht_28"
+    },
+    {
+      "source_id": "SMT_oht_29"
+    },
+    {
+      "source_id": "SMT_oht_30"
+    },
+    {
+      "source_id": "SMT_oht_31"
+    },
+    {
+      "source_id": "SMT_oht_32"
+    },
+    {
+      "source_id": "SMT_oht_33"
+    },
+    {
+      "source_id": "SMT_oht_34"
+    },
+    {
+      "source_id": "SMT_oht_35"
+    },
+    {
+      "source_id": "SMT_oht_36"
+    },
+    {
+      "source_id": "SMT_oht_37"
+    },
+    {
+      "source_id": "SMT_oht_38"
+    },
+    {
+      "source_id": "SMT_oht_39"
+    },
+    {
+      "source_id": "SMT_oht_40"
+    },
+    {
+      "source_id": "SMT_oht_41"
+    },
+    {
+      "source_id": "SMT_oht_42"
+    },
+    {
+      "source_id": "SMT_oht_43"
+    },
+    {
+      "source_id": "SMT_oht_44"
+    },
+    {
+      "source_id": "SMT_oht_45"
+    },
+    {
+      "source_id": "SMT_oht_46"
+    },
+    {
+      "source_id": "SMT_oht_47"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2",
+      "Route_Product_3",
+      "Route_Product_4",
+      "Route_Product_5",
+      "Route_Product_6",
+      "Route_Product_7",
+      "Route_Product_8",
+      "Route_Product_9",
+      "Route_Product_10"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 24,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "dispatch_mode": "deferred",
+    "batch_host_policy": "compatible_buffer"
+  },
+  "assumptions": [
+    "完整冻结来源：10个生产产品、167129条记录，2018—2025完整2922日投片；观察3012日，包含90日尾窗。结果以该次终态和独立核查为准。",
+    "48辆有限OHT的delay模型保留派单、装卸、路程耗时和端口；不用于拥堵、跟驰或安全间距结论。",
+    "deferred、严格同路线/同工序成批、不欠批、不补造lot；源工艺路线、交期/优先级、抽检返工概率不修改。",
+    "名义均值加工，启用源PM/Breakdown参数及本项目声明交互，不声称复现全部源预约/setup avoidance策略。",
+    "compatible_buffer按最低合法批lot预算均衡固定host绑定，保留24输入容量；属于显式路由约束模型，不能与legacy互称等价或据其差异宣称排产规则优劣。",
+    "初始/周期/终态物料全检；端口/lot属性变更索引与车辆全扫描保留动态检查，every_step仍强制全检。运行时注册表不允许替换对象或绕过属性写入。",
+    "队列占用按实际位置进出登记，初始/周期/终态重新扫描复核；只替代重复计数，不减物料审计、有限车辆或缓冲约束。",
+    "24输入上限约束下一站queue与在途计数；产后待输出逻辑库存没有独立数量资源，tool位置不等于加工占用或真实库存空间，详见项目约束与表述边界。",
+    "交期数值来自冻结投片CSV的DUE DATE；历史摘要definition遗留说明不作为当前交期来源依据。",
+    "完整业务事件gzip level1；统计SQLite和任务历史磁盘化，config.tasks仍完整。无高频动画轨迹，不能做逐车运动回放。",
+    "90日尾窗覆盖源最晚交期，不保证严格成批WIP排空；单种子不构成规则优劣或稳态结论。checkpoint与派生数据库不能恢复仿真状态。"
+  ],
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 260236800
+  },
+  "release_calendar": {
+    "products": [
+      "Product_1",
+      "Product_2",
+      "Product_3",
+      "Product_4",
+      "Product_5",
+      "Product_6",
+      "Product_7",
+      "Product_8",
+      "Product_9",
+      "Product_10"
+    ],
+    "start_s": 0,
+    "duration_s": 252460800
+  },
+  "replay": {
+    "enabled": false
+  },
+  "transport": {
+    "model": "delay"
+  },
+  "performance": {
+    "delay_event_wakeup": true,
+    "stream_events": true,
+    "compact_json": true,
+    "route_event_geometry": false,
+    "event_compression": "gzip",
+    "event_compression_level": 1,
+    "incremental_material_audit": true,
+    "metric_history": "sqlite",
+    "spool_task_history": true,
+    "runtime_inventory": true,
+    "material_audit_port_index": true,
+    "queue_occupancy_index": true
+  },
+  "availability": {
+    "enabled": true,
+    "pm": true,
+    "breakdown": true
+  }
+}

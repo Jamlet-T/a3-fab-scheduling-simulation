@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAB CONTROL · fabcosim</title>
+<link rel="stylesheet" href="/assets/console.css">
+</head>
+<body>
+<div class="console" id="console">
+
+  <header class="hud">
+    <div class="hud-brand">
+      <span class="hud-mark" aria-hidden="true"></span>
+      <span class="hud-name">FAB CONTROL</span>
+      <span class="hud-sep">/</span>
+      <span class="hud-sub">晶圆厂调度 · 仿真监控</span>
+    </div>
+    <div class="hud-meta">
+      <span class="hud-chip">730 日长期运行</span>
+      <span class="hud-item">种子 <b id="hud-seed">—</b></span>
+      <span class="hud-item">主窗 <b>365–730</b></span>
+      <span class="hud-live"><i></i>LIVE</span>
+      <span class="hud-clock" id="hud-clock">--:--:--</span>
+    </div>
+  </header>
+
+  <nav class="rule-bar" id="rule-bar" aria-label="调度方案"></nav>
+
+  <section class="kpi-row" id="kpi-row" aria-label="关键指标"></section>
+
+  <section class="main-grid">
+    <article class="panel panel-trend">
+      <div class="panel-head">
+        <h3><i class="ph-dot"></i>在制库存趋势</h3>
+        <span class="panel-note">逐日快照 · 前 365 日为热身</span>
+      </div>
+      <div class="panel-body">
+        <div class="viz" id="trend-chart"></div>
+      </div>
+      <div class="panel-foot" id="trend-foot"></div>
+    </article>
+
+    <div class="side-stack">
+      <article class="panel panel-devices">
+        <div class="panel-head">
+          <h3><i class="ph-dot"></i>设备组负载</h3>
+          <span class="panel-note" id="device-note">条长=积压 · 色段=工况</span>
+        </div>
+        <div class="panel-body">
+          <div class="device-list" id="device-list"></div>
+        </div>
+        <div class="mini-legend">
+          <span><i style="--c:#3fbfa6"></i>加工</span>
+          <span><i style="--c:#c9a24b"></i>换型</span>
+          <span><i style="--c:#6f8fb0"></i>装卸</span>
+          <span><i style="--c:#b65c5c"></i>停机</span>
+          <span><i style="--c:#2c3d4b"></i>空闲</span>
+        </div>
+      </article>
+
+      <article class="panel panel-phases">
+        <div class="panel-head">
+          <h3><i class="ph-dot"></i>在制阶段构成</h3>
+          <span class="panel-note" id="phase-note">第二年主窗 · 均值</span>
+        </div>
+        <div class="panel-body">
+          <div class="phase-bar" id="phase-bar"></div>
+          <ul class="phase-legend" id="phase-legend"></ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="panel panel-table">
+    <div class="panel-head">
+      <h3><i class="ph-dot"></i>方案对照</h3>
+      <span class="panel-note">点击任意行切换当前方案</span>
+    </div>
+    <div class="table-wrap">
+      <table id="rule-table"></table>
+    </div>
+  </section>
+
+  <footer class="hud-foot">
+    <span class="foot-src" id="foot-source">加载中…</span>
+    <span class="foot-alert" id="foot-alert"></span>
+    <a class="foot-link" href="/report">叙事版与口径说明 →</a>
+  </footer>
+
+  <div class="toast" id="toast" hidden></div>
+</div>
+<script src="/assets/console.js"></script>
+</body>
+</html>

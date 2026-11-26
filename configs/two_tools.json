@@ -1,0 +1,29 @@
+{
+  "name": "two-tools-one-oht",
+  "description": "合成小场景；秒、米。不是SMAT2022完整基准。",
+  "step_s": 0.1,
+  "max_time_s": 120,
+  "processing_s": {"A": 5, "B": 4},
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "track": {"width_m": 40, "height_m": 20},
+  "ports": {
+    "A": {"edge": "e0", "position_m": 5},
+    "B": {"edge": "e1", "position_m": 10}
+  },
+  "oht": {
+    "initial_position_m": 1,
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3
+  },
+  "assumptions": [
+    "单向矩形轨道、两个容量为1的端口、一辆车、一个lot，路线为A→B。",
+    "取货/卸货各1秒是演示默认值，不来自SMAT2022。",
+    "车停靠后完成取货才占有lot；卸货完成后目标端口才接收lot。",
+    "加工及取送完成向上对齐到时间步；量化误差小于一个时间步。",
+    "未实现机台装卸、批处理、故障、ZCU和重入路线；不叠加抽样运输延迟。"
+  ]
+}

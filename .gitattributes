@@ -1,0 +1,23 @@
+* text=auto eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.toml text eol=lf
+*.svg text eol=lf
+*.ps1 text eol=crlf
+*.pdf binary
+*.docx binary
+*.pptx binary
+*.xlsx binary
+
+# 冻结的运行输入按字节校验 SHA256，禁止换行转换。
+/03-数据/基准-v1/** -text whitespace=cr-at-eol
+/04-研究/freeze_data_baseline.py -text
+/04-研究/verify_data_baseline.py -text
+
+# 既有冻结文件为 CRLF，且补丁上下文含行尾空格；保持原字节。
+/configs/smat_full_product1.json -text whitespace=cr-at-eol
+/src/fabcosim/cosim/full.py -text whitespace=cr-at-eol
+/src/fabcosim/production/machine_routines.py -text whitespace=cr-at-eol
+/src/fabcosim/production/machines.py -text whitespace=cr-at-eol
+/src/fabcosim/production/wafer_tail.py -text whitespace=cr-at-eol

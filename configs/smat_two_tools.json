@@ -1,0 +1,38 @@
+{
+  "name": "smat-real-network-two-tools",
+  "description": "SMAT2022 LVHM_E真实路网，两设备、一车、一lot运输接入场景。",
+  "step_s": 0.1,
+  "max_time_s": 1800,
+  "processing_s": {"A": 5, "B": 4},
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+    "coordinate_scale": 0.001,
+    "vehicle_id": "SMT_oht_0"
+  },
+  "ports": {
+    "A": {"source_id": "DIF0138_Port1"},
+    "B": {"source_id": "ECH0578_Port1"}
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3
+  },
+  "source_operations": {"route": "Route_Product_1", "steps": [1, 2]},
+  "assumptions": [
+    "导入全部源节点、轨道、设备位置和端口偏移；仅运行SMT_oht_0及一个lot。",
+    "A=DIF0138（A20），B=ECH0578（B18），对应Product 1前两道工序的设备组。",
+    "本阶段加工仍为5/4秒演示耗时，没有实现源工艺的批处理、wafer节拍等生产语义。",
+    "源坐标、端口距离与车辆参数按毫米转换到米；单位缩放作为建模假设。",
+    "曲轨缺少弧长和控制点，使用端点弦线；运输时长尚未做物理校准。",
+    "Rail.MAX_SPEED含义待核实，所有轨道暂使用车辆速度上限。",
+    "单车场景不执行ZCU、多车合流冲突和曲线限速；源ZCU字段保留在映射文件中。",
+    "车辆按有向最短距离路径先空驶取货，再载货交付；停靠后取送各1秒。",
+    "主控0.1秒，加工及取送完成向上对齐时间网格；不叠加随机运输延迟。"
+  ]
+}

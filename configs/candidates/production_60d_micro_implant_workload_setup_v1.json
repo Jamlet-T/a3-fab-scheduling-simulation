@@ -1,0 +1,110 @@
+{
+  "name": "candidate_production_60d_micro_implant_workload_setup_v1",
+  "seed": 20261110,
+  "full_route": true,
+  "step_s": 0.1,
+  "max_time_s": 5184000,
+  "static_time_skip": true,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2",
+      "Route_Product_3",
+      "Route_Product_4",
+      "Route_Product_5",
+      "Route_Product_6",
+      "Route_Product_7",
+      "Route_Product_8",
+      "Route_Product_9",
+      "Route_Product_10"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 24,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "dispatch_mode": "deferred",
+    "batch_host_policy": "compatible_buffer",
+    "fixed_transfer_s": 60,
+    "legal_candidates_only": true,
+    "delay32_policy": "exclude",
+    "wafer_detail": "micro"
+  },
+  "assumptions": [
+    "纯生产范围：完整工艺、生产资源、严格成批、返工、故障与维护保留；无OHT车辆、路网、运输任务、物流端口和轨迹。",
+    "固定转运60秒为非零工序交接建模假设，用于防止前后工序同刻衔接；不是实测物流时间。首站入厂及末站出厂同样使用该延迟，同设备和虚拟工序也不豁免。",
+    "生产输入24 lot容量覆盖在途预留与到站队列，离队进入机台时释放。产后待转出逻辑库存沿用无独立容量资源边界，不代表真实空间可行。",
+    "设备映射和机台数量来自既有SMAT设施表；目的地least_loaded修复后按已授予输入位与等待准入工作量选取，不计算距离。compatible_buffer绑定、deferred与严格批量保持。",
+    "名义均值加工和源PM/Breakdown及本项目声明交互；单种子不能泛化规则优劣。本次短窗不启用快照。",
+    "SMAT2022启发的纯生产范围：源Delay_32仅保留来源与排除审计，不执行独立停留、不为它访问Stocker；其他生产输入容量及固定转运保持。",
+    "十产品前60日持续投片，0日冷启动，主报告(30,60]日；不是稳态或全日历。",
+    "本benchmark以详细micro为参考，源日历[0,60)日持续投片；主观察(30,60]日、辅观察(46,60]日，均为冷启动有限时窗，不宣称稳态。",
+    "本配置为implant_setup_fifo_3groups对照；仅重排已到站合法非Batch队列，24h老化保护不覆盖准入前等待，其余组回退FIFO。",
+    "独立选机候选：仅三离子注入组非Batch使用已承诺整lot名义服务、已观察加工阶段、当前维护故障的源均值及按家族集中一次服务的换型成本估计；实际仍使用原implant_setup_fifo_3groups派工。",
+    "不预测未来故障、抽检、返工或实际完工；评分为预计清理已承诺工作加新批的时间，不是本批真实完工时刻或严格上下界。已发生指数维修按条件剩余均值估计，PM按源均值减已过时间且至少一个网格，多个同名PM取源均值最大值。"
+  ],
+  "observation": {
+    "warmup_s": 2592000,
+    "end_s": 5184000
+  },
+  "release_calendar": {
+    "products": [
+      "Product_1",
+      "Product_2",
+      "Product_3",
+      "Product_4",
+      "Product_5",
+      "Product_6",
+      "Product_7",
+      "Product_8",
+      "Product_9",
+      "Product_10"
+    ],
+    "start_s": 0,
+    "duration_s": 5184000
+  },
+  "replay": {
+    "enabled": false
+  },
+  "transport": {
+    "model": "production_only"
+  },
+  "performance": {
+    "stream_events": true,
+    "compact_json": true,
+    "route_event_geometry": false,
+    "event_compression": "gzip",
+    "event_compression_level": 1,
+    "incremental_material_audit": true,
+    "metric_history": "sqlite",
+    "runtime_inventory": true,
+    "material_audit_port_index": true,
+    "queue_occupancy_index": true
+  },
+  "availability": {
+    "enabled": true,
+    "pm": true,
+    "breakdown": true
+  },
+  "policies": {
+    "destination": "implant_workload_setup_v1",
+    "production": {
+      "job": "implant_setup_fifo_3groups",
+      "group": "earliest_ready"
+    }
+  },
+  "analysis_windows": [
+    {
+      "name": "last14d",
+      "warmup_s": 3974400,
+      "end_s": 5184000
+    }
+  ]
+}

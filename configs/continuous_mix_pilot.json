@@ -1,0 +1,87 @@
+{
+  "name": "continuous-mix-pilot",
+  "seed": 20261004,
+  "full_route": true,
+  "step_s": 0.2,
+  "frame_interval_s": 30,
+  "motion_interval_s": 0.2,
+  "motion_chunk_s": 600,
+  "max_time_s": 172800,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3,
+    "port_stop_tolerance_m": 0.1
+  },
+  "traffic": {
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2,
+    "stall_timeout_s": 300
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 12,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "batch_policy": "queue_batch"
+  },
+  "assumptions": [
+    "普通机台串行，wafer/lot级联使用两模块；load/unload独立读取源1分钟，不算作OHT取送。",
+    "Delay_32在真实STOCKER中保留源工艺等待，400虚拟资源；不计入物理加工设备，不叠加原随机搬运延迟。",
+    "setup按源表/序列矩阵；冷启动缺省使用进入该setup的最大定义时间；气体最小run长度不足仅记录，不硬阻止有限场景排空。",
+    "CQT从源加工结束到指定工序开始，违例只记录；dedication约束未来实际设备选择。",
+    "机台输入缓冲允许本场景十二lot排队，Port1/末端口作为输入/输出；角色为模型假设。",
+    "无运输需求时车队在区域外原生停车；全部停稳才批量推进静止时段，有运输需求则恢复巡行。",
+    "停稳时运输积分器暂停，主时钟及生产事件正常推进；恢复运动使用明确的内部时钟偏移，不重建、移动或删除车辆。原生SUMO等待时长不作为全局等待指标。",
+    "未接入故障/维护、SuperHotLot预约及源CR/气体setupavoidance策略；此为完整路线可运行基线，不是完整基准性能复现。",
+    "毫米转米、曲轨弦线及OHT取送时间仍为原模型假设；区域控制无通用死锁消解。",
+    "两产品原始完整521/529步；各6个初始lot在0释放，其后每4小时交替投片，2日截止保留WIP，仅用于联调。",
+    "queue_batch按同产品同源工序聚批，足量才启动；首个lot为该批工序选定真实机台，后续该产品同工序在同机台聚批。",
+    "不凑足末批、不强制排空；2日观测不是稳态负载或完整出厂验证。",
+    "本联调使用0.2秒SUMO步长及0.2秒运动记录，车长、间距、速度及路权参数保留。",
+    "端口验收须匹配当前原生停靠目标及已开始停靠；允许0.1米车头离目标误差，不改写实际坐标。"
+  ],
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 172800
+  },
+  "release_stream": {
+    "interval_s": 14400,
+    "start_s": 14400,
+    "route_pattern": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "wafer_count": 25,
+    "bootstrap_lots_per_route": 6
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "baseline_id": "SMAT2022-SMT2020-LVHM_E-v1",
+  "source_and_derived_hashes_verified": 16,
+  "physical_groups": 105,
+  "physical_tools": 1068,
+  "routes": 13,
+  "operations": 5646,
+  "release_events": 200567,
+  "result": "verified",
+  "scope": "source integrity, mapping, route references, fixed release selection; not a simulation correctness test"
+}

@@ -1,0 +1,46 @@
+{
+  "name": "smat-product1-reentrant-370-372",
+  "step_s": 0.1,
+  "frame_interval_s": 2,
+  "max_time_s": 30000,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022", "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {"length_m": 0.784, "min_gap_m": 0.125, "max_speed_m_s": 1.5, "accel_m_s2": 2, "decel_m_s2": 3},
+  "traffic": {"lookahead_m": 8, "stop_margin_m": 0.2, "junction_clearance_m": 2},
+  "vehicles": [{"source_id": "SMT_oht_0"}, {"source_id": "SMT_oht_1"}, {"source_id": "SMT_oht_2"}],
+  "ports": {
+    "A.in": {"source_id": "DIE0134_Port1"}, "A.out": {"source_id": "DIE0134_Port4"},
+    "B.in": {"source_id": "DIE0104_Port1"}, "B.out": {"source_id": "DIE0104_Port4"}
+  },
+  "routes": {
+    "product1_segment": {
+      "source_csv": "03-数据/基准-v1/route_operations.csv",
+      "source_route": "Route_Product_1",
+      "processing_policy": "nominal_mean_serial",
+      "operations": [
+        {"source_step": 370, "input_port": "A.in", "output_port": "A.out"},
+        {"source_step": 371, "input_port": "B.in", "output_port": "B.out"},
+        {"source_step": 372, "input_port": "A.in", "output_port": "A.out"}
+      ]
+    }
+  },
+  "lots": [
+    {"id": "lot0", "route": "product1_segment", "release_s": 0},
+    {"id": "lot1", "route": "product1_segment", "release_s": 900},
+    {"id": "lot2", "route": "product1_segment", "release_s": 1800}
+  ],
+  "assumptions": [
+    "真实连续工艺片段：Product 1第370—372步，Dielectric_BE_60→Dielectric_BE_20→Dielectric_BE_60；固定映射到DIE0134→DIE0104→DIE0134。",
+    "三个lot初始位于片段入口待加工队列，释放时间0/900/1800秒为小场景输入；不模拟前369步，也不是原始订单释放日历。",
+    "按lot加工，源均值49.824/33.636/39.468分钟换算为秒；使用固定均值，不随机采样、不压缩工艺时间。",
+    "两台设备各容量1；保留源级联间隔字段但不复现级联重叠，采用保守串行加工；不包含设备装卸耗时、故障维护或全路线语义。",
+    "每台设备Port1作为输入、Port4作为输出，方向与容量1是本场景声明；两端口共享同一机台。",
+    "每lot只有一个实体；下一工序只能在真实运输、卸货、目标端口收货后进入加工。",
+    "闲车沿有向回路巡行，派单与区域控制沿用多车规则；空间毫米转米、曲轨弦线与运输参数未校准。",
+    "仿真步长0.1秒；回放常规每2秒采样并保留交接/工艺状态变化帧，事件保存完整时间；非500车完整生产基准。"
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "name": "performance_delay_a1_1d",
+  "seed": 20261014,
+  "full_route": true,
+  "step_s": 0.1,
+  "frame_interval_s": 30,
+  "motion_interval_s": 0.1,
+  "motion_chunk_s": 600,
+  "max_time_s": 86400,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3
+  },
+  "traffic": {
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    },
+    {
+      "source_id": "SMT_oht_3"
+    },
+    {
+      "source_id": "SMT_oht_4"
+    },
+    {
+      "source_id": "SMT_oht_5"
+    },
+    {
+      "source_id": "SMT_oht_6"
+    },
+    {
+      "source_id": "SMT_oht_7"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": true,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 24,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "dispatch_mode": "deferred"
+  },
+  "assumptions": [
+    "性能诊断首日观察切片，来源本地既有ms-s20261014-fifo-nofault.json；保留原投片定义、路线、步长、车辆与规则，只观察前1日，期末保留WIP。",
+    "短窗口处于启动阶段，不代表完整工厂负载，不可外推长期耗时或算法排序。",
+    "delay档（若启用）不包含拥堵、区域控制与安全间距，不能支持运输调度结论。"
+  ],
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 86400
+  },
+  "release_calendar": {
+    "products": [
+      "Product_1",
+      "Product_2"
+    ],
+    "start_s": 0,
+    "duration_s": 864000
+  },
+  "replay": {
+    "enabled": false
+  },
+  "transport": {
+    "model": "delay"
+  },
+  "policies": {
+    "production": {
+      "job": "fifo"
+    }
+  },
+  "performance": {
+    "delay_event_wakeup": true,
+    "stream_events": true,
+    "compact_json": true,
+    "route_event_geometry": false
+  }
+}

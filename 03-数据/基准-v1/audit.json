@@ -1,0 +1,872 @@
+{
+  "production_sheets": {
+    "Toolgroups": {
+      "stored_nonempty_rows": 106,
+      "columns": [
+        "AREA",
+        "TOOLGROUP",
+        "NUMBER OF TOOLS",
+        "CASCADINGTOOL",
+        "BACTHINGTOOL",
+        "BATCHCRITERION",
+        "BATCHING UNIT",
+        "LOADINGTIME",
+        "LT UNITS",
+        "UNLOADINGTIME",
+        "ULT UNITS",
+        "TOOLGROUPLOCATION",
+        "DISPATCHING",
+        "Ranking 1",
+        "Ranking 2",
+        "Ranking 3",
+        "TOOL WAKE UP Ranking"
+      ]
+    },
+    "PM": {
+      "stored_nonempty_rows": 292,
+      "columns": [
+        "PM EVENT NAME",
+        "PM EVENT VALID FOR TYPE",
+        "TYPE NAME",
+        "PM TYPE",
+        "MTBeforePM",
+        "MTBPM UNITS",
+        "TTR DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "TTR UNITS",
+        "FIRST ONE AT DISTRIBUTION",
+        "FOA",
+        "FOA UNITS"
+      ]
+    },
+    "Breakdown": {
+      "stored_nonempty_rows": 11,
+      "columns": [
+        "DOWN EVENT NAME",
+        "DOWN EVENT VALID FOR TYPE",
+        "TYPE NAME",
+        "DOWN TYPE",
+        "TTF DISTRIBUTION",
+        "MTTF",
+        "MTTF UNITS",
+        "TTR DISTRIBUTION",
+        "MTTR",
+        "MTTR UNITS",
+        "FIRST ONE AT DISTRIBUTION",
+        "FOA",
+        "FOA UNITS"
+      ]
+    },
+    "Setups": {
+      "stored_nonempty_rows": 13,
+      "columns": [
+        "SETUP GROUP NAME",
+        "CURRENT SETUP",
+        "NEW SETUP",
+        "SETUP TIME",
+        "ST UNITS",
+        "MINMAL NUMBER OF RUNS"
+      ]
+    },
+    "Transport": {
+      "stored_nonempty_rows": 1,
+      "columns": [
+        "FROM LOCATION",
+        "TO LOCATION",
+        "TRANSPORTTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "TT UNITS"
+      ]
+    },
+    "Lotrelease": {
+      "stored_nonempty_rows": 27,
+      "columns": [
+        "PRODUCT NAME",
+        "ROUTE NAME",
+        "LOT NAME/TYPE",
+        "PRIORITY",
+        "SUPERHOTLOT",
+        "WAFERS PER LOT",
+        "START DATE",
+        "RELEASE DISTRIBUTION",
+        "RELEASE INTERVAL",
+        "R UNITS",
+        "LOTS PER RELEASE",
+        "DUE DATE",
+        "Release Scenario"
+      ]
+    },
+    "Lotrelease - variable due dates": {
+      "stored_nonempty_rows": 167129,
+      "columns": [
+        "PRODUCT NAME",
+        "ROUTE NAME",
+        "LOT NAME/TYPE",
+        "PRIORITY",
+        "SUPERHOTLOT",
+        "WAFERS PER LOT",
+        "START DATE",
+        "DUE DATE",
+        "Release Scenario"
+      ]
+    },
+    "Lotrelease - Engineering": {
+      "stored_nonempty_rows": 33438,
+      "columns": [
+        "PRODUCT NAME",
+        "ROUTE NAME",
+        "LOT NAME/TYPE",
+        "PRIORITY",
+        "WAFERS PER LOT",
+        "START DATE",
+        "DUE DATE",
+        "Release Scenario"
+      ]
+    },
+    "Route_Product_E1": {
+      "stored_nonempty_rows": 521,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_E2": {
+      "stored_nonempty_rows": 529,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_E3": {
+      "stored_nonempty_rows": 583,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_1": {
+      "stored_nonempty_rows": 521,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_2": {
+      "stored_nonempty_rows": 529,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_3": {
+      "stored_nonempty_rows": 583,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_4": {
+      "stored_nonempty_rows": 343,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_5": {
+      "stored_nonempty_rows": 242,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_6": {
+      "stored_nonempty_rows": 293,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_7": {
+      "stored_nonempty_rows": 353,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_8": {
+      "stored_nonempty_rows": 375,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_9": {
+      "stored_nonempty_rows": 384,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    },
+    "Route_Product_10": {
+      "stored_nonempty_rows": 390,
+      "columns": [
+        "ROUTE",
+        "STEP",
+        "STEP DESCRIPTION",
+        "AREA",
+        "TOOLGROUP",
+        "PROCESSING UNIT",
+        "PROCESSINGTIME DISTRIBUTION",
+        "MEAN",
+        "OFFSET",
+        "PT UNITS",
+        "CASCADING INTERVAL",
+        "C Units",
+        "BATCH MINIMUM",
+        "BATCH MAXIMUM",
+        "SETUP",
+        "WHEN",
+        "SETUP DISTRIBUTION",
+        "SETUP TIME",
+        "OFFSET__2",
+        "ST UNITS",
+        "STEP FOR LTL DEDICATION",
+        "REWORK PROBABILITY in %",
+        "R UNIT",
+        "STEP FOR REWORK",
+        "PROCESSING PROBABILITY in % (Sampling)",
+        "STEP FOR CRITICAL QUEUE TIME",
+        "CQT",
+        "CQTUNITS"
+      ]
+    }
+  },
+  "amhs_counts": {
+    "Address": 2858,
+    "ZCU": 734,
+    "Rail": 3424,
+    "Bay": 43,
+    "Equipment": 1116,
+    "PortType": 6,
+    "Port": 22120,
+    "VehicleType": 1,
+    "Vehicle": 500
+  },
+  "mapping_errors": [],
+  "unmapped_spatial_groups": [],
+  "routes": {
+    "Route_Product_E1": {
+      "operations": 521,
+      "virtual_delay_operations": 22,
+      "physical_operations": 499,
+      "distinct_physical_groups": 103,
+      "repeat_group_visits_beyond_first": 396,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 15,
+        "Wafer": 233,
+        "Lot": 273
+      },
+      "processing_distributions": {
+        "uniform": 521
+      }
+    },
+    "Route_Product_E2": {
+      "operations": 529,
+      "virtual_delay_operations": 22,
+      "physical_operations": 507,
+      "distinct_physical_groups": 100,
+      "repeat_group_visits_beyond_first": 407,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 19,
+        "Wafer": 233,
+        "Lot": 277
+      },
+      "processing_distributions": {
+        "uniform": 529
+      }
+    },
+    "Route_Product_E3": {
+      "operations": 583,
+      "virtual_delay_operations": 24,
+      "physical_operations": 559,
+      "distinct_physical_groups": 104,
+      "repeat_group_visits_beyond_first": 455,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 17,
+        "Wafer": 256,
+        "Lot": 310
+      },
+      "processing_distributions": {
+        "uniform": 583
+      }
+    },
+    "Route_Product_1": {
+      "operations": 521,
+      "virtual_delay_operations": 22,
+      "physical_operations": 499,
+      "distinct_physical_groups": 103,
+      "repeat_group_visits_beyond_first": 396,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 15,
+        "Wafer": 233,
+        "Lot": 273
+      },
+      "processing_distributions": {
+        "uniform": 521
+      }
+    },
+    "Route_Product_2": {
+      "operations": 529,
+      "virtual_delay_operations": 22,
+      "physical_operations": 507,
+      "distinct_physical_groups": 100,
+      "repeat_group_visits_beyond_first": 407,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 19,
+        "Wafer": 233,
+        "Lot": 277
+      },
+      "processing_distributions": {
+        "uniform": 529
+      }
+    },
+    "Route_Product_3": {
+      "operations": 583,
+      "virtual_delay_operations": 24,
+      "physical_operations": 559,
+      "distinct_physical_groups": 104,
+      "repeat_group_visits_beyond_first": 455,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 17,
+        "Wafer": 256,
+        "Lot": 310
+      },
+      "processing_distributions": {
+        "uniform": 583
+      }
+    },
+    "Route_Product_4": {
+      "operations": 343,
+      "virtual_delay_operations": 10,
+      "physical_operations": 333,
+      "distinct_physical_groups": 81,
+      "repeat_group_visits_beyond_first": 252,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 11,
+        "Wafer": 152,
+        "Lot": 180
+      },
+      "processing_distributions": {
+        "uniform": 343
+      }
+    },
+    "Route_Product_5": {
+      "operations": 242,
+      "virtual_delay_operations": 7,
+      "physical_operations": 235,
+      "distinct_physical_groups": 69,
+      "repeat_group_visits_beyond_first": 166,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 9,
+        "Wafer": 113,
+        "Lot": 120
+      },
+      "processing_distributions": {
+        "uniform": 242
+      }
+    },
+    "Route_Product_6": {
+      "operations": 293,
+      "virtual_delay_operations": 8,
+      "physical_operations": 285,
+      "distinct_physical_groups": 79,
+      "repeat_group_visits_beyond_first": 206,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 12,
+        "Wafer": 133,
+        "Lot": 148
+      },
+      "processing_distributions": {
+        "uniform": 293
+      }
+    },
+    "Route_Product_7": {
+      "operations": 353,
+      "virtual_delay_operations": 12,
+      "physical_operations": 341,
+      "distinct_physical_groups": 91,
+      "repeat_group_visits_beyond_first": 250,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 12,
+        "Wafer": 157,
+        "Lot": 184
+      },
+      "processing_distributions": {
+        "uniform": 353
+      }
+    },
+    "Route_Product_8": {
+      "operations": 375,
+      "virtual_delay_operations": 14,
+      "physical_operations": 361,
+      "distinct_physical_groups": 91,
+      "repeat_group_visits_beyond_first": 270,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 12,
+        "Wafer": 163,
+        "Lot": 200
+      },
+      "processing_distributions": {
+        "uniform": 375
+      }
+    },
+    "Route_Product_9": {
+      "operations": 384,
+      "virtual_delay_operations": 15,
+      "physical_operations": 369,
+      "distinct_physical_groups": 93,
+      "repeat_group_visits_beyond_first": 276,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 13,
+        "Wafer": 163,
+        "Lot": 208
+      },
+      "processing_distributions": {
+        "uniform": 384
+      }
+    },
+    "Route_Product_10": {
+      "operations": 390,
+      "virtual_delay_operations": 13,
+      "physical_operations": 377,
+      "distinct_physical_groups": 93,
+      "repeat_group_visits_beyond_first": 284,
+      "unknown_groups": [],
+      "duplicate_steps": [],
+      "invalid_step_references": [],
+      "processing_units": {
+        "Batch": 15,
+        "Wafer": 171,
+        "Lot": 204
+      },
+      "processing_distributions": {
+        "uniform": 390
+      }
+    }
+  },
+  "route_error_tables": [],
+  "releases": {
+    "Lotrelease - variable due dates": {
+      "records": 167129,
+      "min_release": "2018-01-01T00:00:00",
+      "max_release": "2025-12-31T20:30:20",
+      "products": {
+        "Product_1": 16698,
+        "Product_10": 16698,
+        "Product_2": 16698,
+        "Product_3": 16847,
+        "Product_4": 16698,
+        "Product_5": 16698,
+        "Product_6": 16698,
+        "Product_7": 16698,
+        "Product_8": 16698,
+        "Product_9": 16698
+      },
+      "priority": {
+        "20": 4180,
+        "10": 162800,
+        "30": 149
+      },
+      "wafer_counts": {
+        "25": 167129
+      },
+      "route_overrides": {},
+      "duplicate_lot_names": 0
+    },
+    "Lotrelease - Engineering": {
+      "records": 33438,
+      "min_release": "2018-01-01T08:00:00",
+      "max_release": "2025-12-31T08:00:00",
+      "products": {
+        "Product_1": 11146,
+        "Product_2": 11146,
+        "Product_3": 11146
+      },
+      "priority": {
+        "10": 26751,
+        "20": 6687
+      },
+      "wafer_counts": {
+        "1": 3336,
+        "2": 3314,
+        "7": 3327,
+        "8": 3457,
+        "10": 3342,
+        "9": 3364,
+        "6": 3345,
+        "5": 3335,
+        "4": 3300,
+        "3": 3318
+      },
+      "route_overrides": {
+        "Route_Product_1 -> Route_Product_E1": 11146,
+        "Route_Product_2 -> Route_Product_E2": 11146,
+        "Route_Product_3 -> Route_Product_E3": 11146
+      },
+      "duplicate_lot_names": 0
+    }
+  },
+  "release_errors": [],
+  "physical_group_count": 105,
+  "physical_tool_count": 1068
+}

@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fabcosim"
+version = "0.1.0"
+description = "晶圆厂生产与OHT联合仿真"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "simpy==4.1.2",
+  "openpyxl==3.1.5",
+  "cloudpickle>=3.1,<4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.2", "ruff==0.12.12", "ijson==3.4.0.post0"]
+transport = [
+  "libsumo==1.27.1",
+  "traci==1.27.1",
+  "sumolib==1.27.1",
+  "sumo-data==1.27.1",
+]
+sumo-tools = ["eclipse-sumo==1.27.1"]
+
+[project.scripts]
+fabcosim = "fabcosim.__main__:main"
+fabcosim-viz = "fabcosim.viz.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+fabcosim = [
+  "cosim/replay.html",
+  "cosim/fleet_replay.html",
+  "cosim/motion_player.js",
+  "viz/web/*",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

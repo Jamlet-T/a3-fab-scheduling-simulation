@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>fabcosim · 仿真结果平台</title>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <header class="topbar">
+    <a class="brand" href="#/0">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">fabcosim</span>
+      <span class="brand-slash">/</span>
+      <span class="brand-sub">仿真结果平台</span>
+    </a>
+    <nav class="pager" id="pager" aria-label="页面导航"></nav>
+    <div class="top-actions">
+      <button class="icon-btn" id="theme-toggle" title="切换深色/浅色" aria-label="切换主题">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="12" cy="12" r="8.5"/>
+          <path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+
+    <!-- 00 封面 -->
+    <section class="page cover is-active" data-page="0">
+      <div class="cover-bg" aria-hidden="true">
+        <div class="cover-grid"></div>
+        <div class="cover-glow"></div>
+      </div>
+      <div class="cover-inner">
+        <div class="cover-kicker">晶圆厂生产与 OHT 联合仿真 · 课程设计</div>
+        <h1 class="cover-title">仿真结果<span class="cover-accent">可视化平台</span></h1>
+        <p class="cover-lede">同场景、同投片日历下比较七种派工规则，并把 60 日短期对照与 730 日长期运行放在同一条叙事里。所有数字取自已验收的分析产物，缺失样本不补零。</p>
+
+        <div class="cover-stats" id="cover-stats">
+          <div class="stat"><span class="stat-value" data-stat="0">—</span><span class="stat-label">短期实验</span></div>
+          <div class="stat"><span class="stat-value" data-stat="1">—</span><span class="stat-label">长期实验</span></div>
+          <div class="stat"><span class="stat-value" data-stat="2">—</span><span class="stat-label">派工规则</span></div>
+        </div>
+
+        <div class="cover-cards" id="cover-cards">
+          <button class="dataset-card" data-goto="1">
+            <span class="dc-tag">实验 01</span>
+            <span class="dc-title">60 日 · 七方案 × 三种子</span>
+            <span class="dc-meta" id="dc-weekly">加载中…</span>
+            <span class="dc-go">进入对照 →</span>
+          </button>
+          <button class="dataset-card" data-goto="5">
+            <span class="dc-tag">实验 02</span>
+            <span class="dc-title">730 日 · 长期运行</span>
+            <span class="dc-meta" id="dc-extended">加载中…</span>
+            <span class="dc-go">进入长期结果 →</span>
+          </button>
+        </div>
+      </div>
+      <div class="cover-foot">
+        <span>数据只读 · 本地运行 · 未通过分析的案例不进入统计</span>
+        <span class="cover-keys"><kbd>→</kbd> 开始</span>
+      </div>
+    </section>
+
+    <!-- 01 短期四指标 -->
+    <section class="page" data-page="1">
+      <div class="page-head">
+        <div class="kicker">实验 01 · 60 日持续投片 · 主窗 (30,60] 日</div>
+        <h2>规则提高了出厂，但所有方案末期仍在积累在制</h2>
+        <p class="lede">21 例同场景实验。柱为三个种子等权均值，点与细线是逐种子值与最小—最大范围——不是置信区间。</p>
+      </div>
+      <div class="chart-grid two-by-two" id="p1-grid"></div>
+      <p class="footnote">CQT 违例率与末窗净增都是<strong>越低越好</strong>；出厂与出厂率越高越好。各方案 CQT 检查的样本构成不同，比率不能直接当作工艺能力排序。</p>
+    </section>
+
+    <!-- 02 趋势 -->
+    <section class="page" data-page="2">
+      <div class="page-head">
+        <div class="kicker">实验 01 · 60 日 · 逐日快照</div>
+        <h2>持续投片 60 日，没有一种规则让库存转向</h2>
+        <p class="lede">左图线为三种子逐日记录的均值，色带为种子间范围；虚线标记主窗起点第 30 日、末窗起点第 46 日。</p>
+      </div>
+      <div class="chart-grid two-across" id="p2-grid"></div>
+      <p class="footnote">逐日记录不一定恰在整日，绘图做线性插值；评价窗口内的平均在制使用逐 lot 积分，<strong>未用插值代替</strong>。</p>
+    </section>
+
+    <!-- 03 C 与 Q2 -->
+    <section class="page" data-page="3">
+      <div class="page-head">
+        <div class="kicker">实验 01 · 60 日 · 配对样本</div>
+        <h2>修正版 Q2 压低了 CQT 违例，但吞吐与未闭窗口仍有代价</h2>
+        <p class="lede">每条线是一颗种子，两端分别是 C 与修正版 Q2。四项指标同时看，避免用单项改善替代整体结论。</p>
+      </div>
+      <div class="chart-grid two-by-two" id="p3-grid"></div>
+      <p class="footnote">共同 CQT 只包含两边都在 (30,60] 日完成检查的同一 lot、起止工序与检查序号。C 与 Q2 还存在选机覆盖差异，<strong>不能把差异归因于期限排序单项</strong>。</p>
+    </section>
+
+    <!-- 04 期末在制 -->
+    <section class="page" data-page="4">
+      <div class="page-head">
+        <div class="kicker">实验 01 · 第 60 日快照 · 三种子均值</div>
+        <h2>期末在制的大头仍是等待，不是加工</h2>
+        <p class="lede">把第 60 日在制按所处阶段拆开。改动派工规则可以改变等待在“准入”与“到站”之间的分布，但等待总量没有消失。</p>
+      </div>
+      <div class="chart-grid single" id="p4-grid"></div>
+      <p class="footnote">加工阶段统计的是 lot 数，Batch 可同时含多个 lot，<strong>不能当作忙机台数</strong>；设备关联的逻辑库存也不等于实体设备容量。</p>
+    </section>
+
+    <!-- 05 730 日四指标 -->
+    <section class="page" data-page="5">
+      <div class="page-head">
+        <div class="kicker">实验 02 · 730 日 · 主窗 (365,730] 日</div>
+        <h2>一年热身之后，流量与库存仍未收敛</h2>
+        <p class="lede">14 例全链条通过的长期实验。样本未齐：柱是已通过样本的均值，类目标注实际样本数 n；缺失点不补零。</p>
+      </div>
+      <div class="chart-grid two-by-two" id="p5-grid"></div>
+      <p class="footnote">样本数不同，<strong>不能据此给出完整三种子排序</strong>；首 365 日只作热身，不把长期运行的末段当作稳态。</p>
+    </section>
+
+    <!-- 06 长期趋势 -->
+    <section class="page" data-page="6">
+      <div class="page-head">
+        <div class="kicker">实验 02 · 730 日 · 统一使用已完整通过的种子</div>
+        <h2>在制曲线持续抬升，分块出厂率围着投片水平震荡</h2>
+        <p class="lede">左图逐日库存快照，右图按 30 日分块的出厂率（末块 720—730 日仅 10 日，按实际长度折算）。灰区为首 365 日热身。</p>
+      </div>
+      <div class="chart-grid two-across" id="p6-grid"></div>
+      <p class="footnote">快照曲线用于趋势，<strong>不代替库存积分</strong>；虚线为次年投片均值，用于判断出厂是否只是追平投入。</p>
+    </section>
+
+    <!-- 07 口径边界 -->
+    <section class="page" data-page="7">
+      <div class="page-head">
+        <div class="kicker">方法与边界</div>
+        <h2>这些图能说明什么，不能说明什么</h2>
+        <p class="lede">平台只读分析产物，不重新跑模型、不重新选样本。以下边界同时适用于两套实验。</p>
+      </div>
+      <div class="boundary-grid">
+        <article class="boundary-card">
+          <span class="bc-index">01</span>
+          <h3>样本</h3>
+          <p>60 日为 7 方案 × 3 预注册种子；730 日仅 14 例通过分析，C 与修正版 Q2 各 1 例。样本不齐处不做三种子均值。</p>
+        </article>
+        <article class="boundary-card">
+          <span class="bc-index">02</span>
+          <h3>窗口</h3>
+          <p>短期主窗 (30,60] 日、末窗 (46,60] 日；长期主窗 (365,730] 日、末窗 (700,730] 日。首段作为热身，不当作稳态。</p>
+        </article>
+        <article class="boundary-card">
+          <span class="bc-index">03</span>
+          <h3>统计</h3>
+          <p>均值是等权汇总，范围是最小—最大值。三点样本不足以做显著性主张，图上所有范围都不是置信区间。</p>
+        </article>
+        <article class="boundary-card">
+          <span class="bc-index">04</span>
+          <h3>归因</h3>
+          <p>C 与修正版 Q2 的差异同时包含期限排序与选机覆盖两种改动，不能把单项改善单独归因。</p>
+        </article>
+        <article class="boundary-card">
+          <span class="bc-index">05</span>
+          <h3>外推</h3>
+          <p>仿真不证明真实工厂的固有产能，也不代表一般最优算法。未收敛的长期在制是观察结果，不是产能预测。</p>
+        </article>
+        <article class="boundary-card">
+          <span class="bc-index">06</span>
+          <h3>复现</h3>
+          <p>数据源为 <code>runs/</code> 下的已验收 <code>analysis.json</code>，不随代码克隆自带。原始产物保留，平台不做改写。</p>
+        </article>
+      </div>
+      <div class="source-panel" id="source-panel"></div>
+    </section>
+
+  </main>
+
+  <footer class="bottombar">
+    <div class="page-label" id="page-label">封面</div>
+    <div class="source-label" id="footer-source"></div>
+    <div class="hint"><kbd>←</kbd><kbd>→</kbd> 翻页<span class="hint-sep">·</span><kbd>Home</kbd><kbd>End</kbd></div>
+    <div class="mobile-nav">
+      <button class="m-btn" id="m-prev" aria-label="上一页">←</button>
+      <span class="m-page" id="m-page">1 / 8</span>
+      <button class="m-btn" id="m-next" aria-label="下一页">→</button>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" hidden></div>
+</div>
+
+<script src="/assets/chart.js"></script>
+<script src="/assets/report.js"></script>
+</body>
+</html>

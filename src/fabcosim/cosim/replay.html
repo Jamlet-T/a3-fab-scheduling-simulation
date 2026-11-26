@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>加工与OHT联合仿真 · 运行回放</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#172c46;font:15px system-ui,"Microsoft YaHei",sans-serif}
+main{max-width:1180px;margin:32px auto;padding:0 22px}header{margin-bottom:24px}h1{font-size:27px;margin:0 0 10px}p{color:#617087;line-height:1.65}
+.tag{display:inline-block;padding:5px 10px;border-radius:6px;background:#e3ecfa;color:#315987;font-size:12px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px}
+.panel{background:white;border:1px solid #dde5ee;border-radius:14px;padding:20px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stats b{display:block;font-size:23px;margin-top:8px}.stats span{color:#617087;font-size:13px}
+svg{width:100%;height:auto;background:#fafcff;border-radius:10px;touch-action:none;cursor:grab}.map-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-size:12px;color:#617087}.controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:18px}button,select{font:inherit;border:1px solid #ccdae9;border-radius:7px;padding:8px 12px;background:white;color:#244669;cursor:pointer}button:first-child{background:#2264b8;color:white;border:0}input{flex:1;min-width:100px;accent-color:#2264b8}
+.legend{display:flex;gap:20px;font-size:12px;color:#617087;margin-top:14px}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;background:#2264b8}.yellow{background:#e7a91c}
+h2{font-size:17px;margin:0 0 15px}ol{padding:0;list-style:none;margin:0;max-height:510px;overflow:auto}li{padding:9px 8px;border-left:3px solid #dce5f0;font-size:13px;color:#8390a2;cursor:pointer}li.active{color:#1b527f;border-left-color:#2264b8;background:#f0f6fe}li time{display:inline-block;width:62px;font-variant-numeric:tabular-nums}details{margin-top:20px;color:#617087;line-height:1.8;font-size:13px}#clock{font-variant-numeric:tabular-nums;min-width:100px}@media(max-width:800px){.layout{grid-template-columns:1fr}main{margin:20px auto;padding:0 12px}.stats b{font-size:18px}ol{max-height:260px}}
+</style>
+<main>
+<header><span class="tag" id="scope">SimPy + SUMO</span><h1>加工与OHT联合仿真</h1><p id="description">两设施 · 一辆OHT · 一个lot。车辆位置来自实际仿真采样；下一道加工等待运输交付。</p></header>
+<div class="stats"><div class="panel"><span>仿真时间</span><b id="time">0.0 s</b></div><div class="panel"><span>OHT状态</span><b id="state">—</b></div><div class="panel"><span>物料位置</span><b id="location">—</b></div></div>
+<div class="layout"><section class="panel"><h2>轨道与端口</h2><div class="map-tools"><button id="full">全厂视图</button><button id="focus">取送区域</button><span>滚轮缩放 · 拖动平移</span></div><svg id="map" viewBox="0 0 900 460" role="img" aria-label="OHT实际轨迹与设施端口"></svg>
+<div class="controls"><button id="play">播放</button><button id="reset">重置</button><input id="seek" type="range" min="0" step="0.1" value="0" aria-label="回放时间"><span id="clock"></span><select id="rate" aria-label="回放速度"><option value="1">1倍速</option><option value="4" selected>4倍速</option><option value="10">10倍速</option></select></div>
+<div class="legend" style="flex-wrap:wrap"><span><i class="dot"></i>OHT</span><span><i class="dot yellow"></i>lot（取送完成时交接）</span><span>蓝虚线：空驶路线</span><span>橙线：载货路线</span></div>
+<p id="mission" style="margin:10px 0 0;font-size:12px"></p>
+</section><aside class="panel"><h2>生产与运输事件</h2><ol id="events"></ol></aside></div>
+<details><summary>模型范围与默认假设</summary><ul id="assumptions"></ul><p>回放按时间步显示SUMO实际采样点，不重新计算车辆运动。设备位置、路网与工艺实现范围见上述假设。</p></details>
+</main>
+<script>
+const data=__RUN_DATA__;
+const $=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg';
+const names={'A.processing_start':'A开始加工','A.processing_end':'A加工完成','A.port_ready':'A端口等待取货','transport.requested':'请求运输','transport.arrived_A':'OHT到达A端口','transport.pickup_start':'开始取货','transport.pickup_end':'取货完成，lot上车','transport.departed_A':'OHT驶向B','transport.arrived_B':'OHT到达B端口','transport.dropoff_start':'开始卸货','transport.delivered':'交付B端口','B.processing_start':'B开始加工','B.processing_end':'B加工完成','lot.completed':'lot工艺完成'};
+const states={empty_to_A:'空车驶向A',waiting_at_A:'等待物料',picking_up:'取货中',pickup_done:'取货完成',loaded_to_B:'载货驶向B',dropping_off:'卸货中',parked_at_B:'停靠B端口'};
+const locations={'A.tool':'A机台','A.port':'A端口','B.port':'B端口','B.tool':'B机台',completed:'工艺完成'};
+const vehicleId=data.config.oht.source_id||'oht0';locations[vehicleId]='OHT车上';
+const real=data.config.network?.type==='smat2022';$('scope').textContent=(real?'SMAT2022真实路网':'合成场景')+' · SimPy + SUMO';
+if(real){const n=data.config.network.summary;$('description').textContent=`${n.node_count}个节点 · ${n.edge_count}条轨道 · ${n.equipment_count}个设施。当前仅运行一辆OHT与一个lot；曲轨为端点连线近似。`;}
+if(real){const p=data.config.ports;$('mission').textContent=`A：${p.A.equipment}（${p.A.bay}）→ B：${p.B.equipment}（${p.B.bay}）`;}else $('mission').hidden=true;
+const points=data.geometry.lanes.flat(),xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);
+const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys),scale=Math.min(700/(maxX-minX),280/(maxY-minY));
+const xy=p=>[100+(p[0]-minX)*scale,365-(p[1]-minY)*scale];
+function el(tag,attrs,text){const node=document.createElementNS(ns,tag);for(const [k,v] of Object.entries(attrs))node.setAttribute(k,v);if(text)node.textContent=text;$('map').appendChild(node);return node;}
+for(const eq of data.geometry.equipment||[]){const [x,y]=xy([eq.x,eq.y]);const node=el('rect',{x:x-eq.width*scale/2,y:y-eq.height*scale/2,width:eq.width*scale,height:eq.height*scale,fill:'#dce4ee',stroke:'#c2cddc','stroke-width':0.3});const title=document.createElementNS(ns,'title');title.textContent=eq.id+' · '+eq.bay;node.appendChild(title);}
+for(const lane of data.geometry.lanes)el('polyline',{points:lane.map(p=>xy(p).join(',')).join(' '),fill:'none',stroke:'#9fb2c6','stroke-width':real?0.6:6,'stroke-linejoin':'round'});
+for(const [kind,color] of [['empty_lanes','#428acb'],['loaded_lanes','#e59127']])for(const lane of data.geometry[kind]||[])el('polyline',{points:lane.map(p=>xy(p).join(',')).join(' '),fill:'none',stroke:color,'stroke-width':real?2:3,'stroke-dasharray':kind==='empty_lanes'?'4 3':'none','stroke-linejoin':'round'});
+const portPoints={};for(const [name,p] of Object.entries(data.geometry.ports)){const [x,y]=xy(p);portPoints[name]=[x,y];el('circle',{cx:x,cy:y,r:real?4:8,fill:'#fff',stroke:'#416b9b','stroke-width':real?1.5:3});if(real){el('text',{x:x-11,y:y-5,'text-anchor':'middle',fill:'#244669','font-size':10,'font-weight':'bold'},name);}else{const dx=name==='A'?-34:14,dy=name==='A'?14:-30;el('rect',{x:x+dx,y:y+dy,width:86,height:42,rx:5,fill:'#e9f0f9',stroke:'#9eb4ce'});el('text',{x:x+dx+43,y:y+dy+26,'text-anchor':'middle',fill:'#244669','font-size':16},'设施 '+name);}}
+const car=el('circle',{r:real?5:13,fill:'#2264b8',stroke:'white','stroke-width':real?1:3});const cargo=el('circle',{r:real?2.5:6,fill:'#e7a91c',stroke:'white','stroke-width':real?0.5:2});
+let view=[0,0,900,460];const applyView=()=>$('map').setAttribute('viewBox',view.join(' '));
+$('full').onclick=()=>{view=[0,0,900,460];applyView();};
+$('focus').onclick=()=>{const pp=(data.geometry.loaded_lanes||data.geometry.lanes).flat().map(xy),xx=pp.map(p=>p[0]),yy=pp.map(p=>p[1]);const cx=(Math.min(...xx)+Math.max(...xx))/2,cy=(Math.min(...yy)+Math.max(...yy))/2;const w=Math.max(180,Math.max(...xx)-Math.min(...xx)+170,(Math.max(...yy)-Math.min(...yy)+90)*900/460);view=[cx-w/2,cy-w*460/900/2,w,w*460/900];applyView();};
+function world(event){const p=$('map').createSVGPoint();p.x=event.clientX;p.y=event.clientY;return p.matrixTransform($('map').getScreenCTM().inverse());}
+$('map').addEventListener('wheel',e=>{e.preventDefault();const p=world(e),factor=e.deltaY>0?1.15:1/1.15;if(view[2]*factor<40||view[2]*factor>2000)return;view=[p.x-(p.x-view[0])*factor,p.y-(p.y-view[1])*factor,view[2]*factor,view[3]*factor];applyView();},{passive:false});
+let drag=null;$('map').onpointerdown=e=>{drag=world(e);$('map').setPointerCapture(e.pointerId);};$('map').onpointermove=e=>{if(!drag)return;const p=world(e);view[0]+=drag.x-p.x;view[1]+=drag.y-p.y;applyView();};$('map').onpointerup=()=>drag=null;$('map').onpointercancel=()=>drag=null;
+const end=data.trajectory.at(-1).time;$('seek').max=end;$('seek').step=data.config.step_s;
+for(const assumption of data.config.assumptions){const li=document.createElement('li');li.textContent=assumption;$('assumptions').appendChild(li);}
+const eventRows=data.events.map(e=>{const li=document.createElement('li'),t=document.createElement('time');t.textContent=e.time.toFixed(1)+' s';li.append(t,document.createTextNode(names[e.kind]||e.kind));li.onclick=()=>{playing=false;time=e.time;render();};$('events').appendChild(li);return li;});
+let time=0,playing=false,last=0;
+function render(){let i=Math.floor((time+1e-8)/data.config.step_s)-1;i=Math.max(0,Math.min(i,data.trajectory.length-1));const row=data.trajectory[i];const event=data.events.filter(e=>e.time<=time+1e-8).at(-1);const location=event?.location||row.location;const [x,y]=xy([row.x,row.y]);car.setAttribute('cx',x);car.setAttribute('cy',y);const pos=location===vehicleId?[x,y]:portPoints[location.startsWith('A')?'A':'B'];cargo.setAttribute('cx',pos[0]);cargo.setAttribute('cy',pos[1]-(real?7:18));$('time').textContent=time.toFixed(1)+' s';$('state').textContent=states[row.state]||row.state;$('location').textContent=locations[location]||location;$('seek').value=time;$('clock').textContent=time.toFixed(1)+' / '+end.toFixed(1)+' s';$('play').textContent=playing?'暂停':'播放';eventRows.forEach((li,j)=>li.classList.toggle('active',data.events[j].time<=time+1e-8));}
+$('play').onclick=()=>{if(time>=end)time=0;playing=!playing;render();};$('reset').onclick=()=>{playing=false;time=0;render();};$('seek').oninput=e=>{time=Number(e.target.value);playing=false;render();};
+function frame(ts){if(playing&&last){time=Math.min(end,time+(ts-last)/1000*Number($('rate').value));if(time>=end)playing=false;render();}last=ts;requestAnimationFrame(frame);}render();requestAnimationFrame(frame);
+</script>
+</html>

@@ -1,0 +1,79 @@
+{
+  "name": "smat_full_calendar_3d",
+  "seed": 20261003,
+  "full_route": true,
+  "step_s": 0.1,
+  "frame_interval_s": 30,
+  "motion_interval_s": 0.1,
+  "motion_chunk_s": 600,
+  "max_time_s": 7776000,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3
+  },
+  "traffic": {
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 24,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "dispatch_mode": "deferred"
+  },
+  "assumptions": [
+    "投片来自冻结释放日历production_release.csv的前3日窗口（两个产品，36个lot），交期、优先级、wafer数均为数据真值，不是声明规则。",
+    "窗口外的释放有意丢弃，不循环、不复制、不补造；这不等同于完整生产日历已复现。",
+    "allow_underfilled_after_timeout=false与input_buffer_lots=24用于让批处理产生真实的等批队列；实测这是本模型下生产派工决策空间的主要来源。",
+    "dispatch_mode=deferred，否则production.job在immediate下不起作用。",
+    "观测窗90日，到点即停保留在制；未完工lot按右删失单列，不进入准时比例。",
+    "本场景实测90日内0 lot完工而交期仅34.1—64.6日，因此延期指标在此规模下饱和、尚不可用于规则比较；原因与后续见开发记录2026-10-13-真实释放日历接入.md。",
+    "单种子有限观察，不构成任何调度规则优劣结论。"
+  ],
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 7776000
+  },
+  "release_calendar": {
+    "products": [
+      "Product_1",
+      "Product_2"
+    ],
+    "start_s": 0,
+    "duration_s": 259200
+  },
+  "replay": {
+    "enabled": false
+  }
+}

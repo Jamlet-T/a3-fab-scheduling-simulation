@@ -1,0 +1,86 @@
+{
+  "name": "episode_high3_20d",
+  "seed": 20261004,
+  "full_route": true,
+  "step_s": 0.2,
+  "frame_interval_s": 300,
+  "max_time_s": 1728000,
+  "static_time_skip": true,
+  "pickup_s": 1,
+  "dropoff_s": 1,
+  "network": {
+    "type": "smat2022",
+    "coordinate_scale": 0.001,
+    "workbook": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx"
+  },
+  "oht": {
+    "length_m": 0.784,
+    "min_gap_m": 0.125,
+    "max_speed_m_s": 1.5,
+    "accel_m_s2": 2,
+    "decel_m_s2": 3,
+    "port_stop_tolerance_m": 0.1
+  },
+  "traffic": {
+    "use_route_ids": true,
+    "fit_native_stops": true,
+    "lookahead_m": 8,
+    "stop_margin_m": 0.2,
+    "junction_clearance_m": 2,
+    "stall_timeout_s": 300,
+    "local_stall_timeout_s": 3600
+  },
+  "vehicles": [
+    {
+      "source_id": "SMT_oht_0"
+    },
+    {
+      "source_id": "SMT_oht_1"
+    },
+    {
+      "source_id": "SMT_oht_2"
+    }
+  ],
+  "production": {
+    "routes": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "processing_distribution": "nominal_mean",
+    "batch_wait_s": 1800,
+    "allow_underfilled_after_timeout": false,
+    "queue_penalty_m": 120,
+    "input_buffer_lots": 12,
+    "internal_transfer_s": 1,
+    "max_visits_per_lot": 2000,
+    "batch_policy": "queue_batch",
+    "dispatch_mode": "deferred"
+  },
+  "observation": {
+    "warmup_s": 0,
+    "end_s": 1728000
+  },
+  "release_stream": {
+    "interval_s": 172800,
+    "route_pattern": [
+      "Route_Product_1",
+      "Route_Product_2"
+    ],
+    "wafer_count": 25,
+    "bootstrap_lots_per_route": 12
+  },
+  "replay": {
+    "enabled": false
+  },
+  "assumptions": [
+    "本场景是**短回合决策诊断实例**，不是KPI基准：20日远短于Product 1/2的约100—137日周期，窗口内基本无lot完工，因此不用于产出率/周期/交期结论。",
+    "用途是在有负载压力的条件下比较运输任务排序、选车与生产派工规则，可用观测为运输等待、空驶比例、阻塞时间与在制品分布。",
+    "本配置实测的决策空间：运输任务排序在约48%的派单上有≥2个候选；选车约92%有2—3个候选；生产派工只有约6%的调用有≥2个候选，因为33个lot摊在约100台机台上，机台大多空闲。要评测生产派工需同时提高bootstrap_lots_per_route与input_buffer_lots，后者是决策深度的硬上限（实测最深候选恰等于该值）。测量见04-研究/开发记录/2026-10-13-决策点自由度与推迟派工.md。",
+    "horizon由observation.end_s与max_time_s共同决定，改这两个值即改回合长度；两者必须一致。",
+    "与continuous_high_3.json使用相同的投片节拍、车辆数、初始在制品与步长，差别只在回合长度、关闭回放，以及dispatch_mode。",
+    "dispatch_mode=deferred：机台空闲时才派下一批，job留在requests中等待，生产派工策略因此能看到真实机台队列；成批时机与immediate不同，**两种模式的结果不可互比**。",
+    "初始每路线12个25-wafer lot，与持续投片矩阵的bootstrap一致；这是初始在制品声明，不代表原生产日历。",
+    "回放关闭仅影响展示，不改变运动、约束检查或统计口径。",
+    "其余生产、运输与交通假设同continuous_high_3.json，未在此重复列出。"
+  ]
+}

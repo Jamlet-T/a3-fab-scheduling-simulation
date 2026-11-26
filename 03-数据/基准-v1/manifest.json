@@ -1,0 +1,111 @@
+{
+  "baseline_id": "SMAT2022-SMT2020-LVHM_E-v1",
+  "date": "2026-09-30",
+  "sources": [
+    {
+      "path": "03-数据/SMT2020-official/extracted/SMT_2020 - Final/General Data/dataset 4/SMT_2020_Model_Data_-_LVHM_E.xlsx",
+      "size_bytes": 28147129,
+      "sha256": "1620611da6afcf3b22066a2b2d1e88a2beb262ebcd1fe80c00850ede5e660a77"
+    },
+    {
+      "path": "03-数据/SMAT2022/General Data/dataset 4/SMAT_2022_Model_Data_-_LVHM_E.xlsx",
+      "size_bytes": 1051571,
+      "sha256": "8e74e6db2272ad7dbeeb26de2adb1cd69e27a7848fe7baa0524803fd317156c0"
+    },
+    {
+      "path": "03-数据/SMT2020-official/extracted/SMT_2020 - Final/AutoSched/dataset 4/LVHM_E_Model/LVHM_E_Model.asd/part.txt",
+      "size_bytes": 1240,
+      "sha256": "0fb00d2fdc9089740847113ad7237c9b2a2532e1de69887e17b3b85832fbaa9d"
+    },
+    {
+      "path": "03-数据/SMT2020-official/SMT2020.zip",
+      "size_bytes": 110359829,
+      "sha256": "19c07bfb68cbc5838429531f27d51428155bb11baf58dc79f8caf84b09856872"
+    },
+    {
+      "path": "03-数据/SMT2020-official/extracted/SMT_2020 - Final/SMT_2020_AutoSched_AP_documentation.docx",
+      "size_bytes": 4345669,
+      "sha256": "1801fea25aafb42a0513c11baf81cfdb7867352fd894e823dcb4f59fcbef6ac6"
+    },
+    {
+      "path": "03-数据/SMT2020-official/extracted/SMT_2020 - Final/SMT_2020_generic_format.docx",
+      "size_bytes": 24978,
+      "sha256": "868ef9d508175fad14aa51d304aff1e8306a8b6d7e204b2019f4f6d84ae01f59"
+    },
+    {
+      "path": "03-数据/SMAT2022/SMAT_2022_generic.docx",
+      "size_bytes": 28921,
+      "sha256": "2156dc360d32e71b2f1e14e5e860cbce5ea6d6cb4e971a338c89bced0bbc5a4f"
+    },
+    {
+      "path": "03-数据/SMAT2022/SMAT_2022_PINOKIO_documentation.docx",
+      "size_bytes": 19310,
+      "sha256": "533839fe9add980878912f9c5e59dcf41088177a0e1be7b86b7689abb81217ea"
+    }
+  ],
+  "derived": [
+    {
+      "path": "03-数据/基准-v1/toolgroup_mapping.csv",
+      "sha256": "7f3dc7bfde4bc00b320e6be0e447f22b8abf69aa669583604b9b5c5402c6d6ab"
+    },
+    {
+      "path": "03-数据/基准-v1/route_operations.csv",
+      "sha256": "76726ffe7dcb10fd8f8d49f6d37defec5e4972e848733e63b82933ad7d4b06c1"
+    },
+    {
+      "path": "03-数据/基准-v1/production_release.csv",
+      "sha256": "1bac854e3e0c837a445f7741e8b05632b11d73094af39b6de4fac6a24577ae73"
+    },
+    {
+      "path": "03-数据/基准-v1/engineering_release.csv",
+      "sha256": "4290e55eb2ba43be264fcc34356db428600ed57bc867aec333eb8742dc1f97f6"
+    },
+    {
+      "path": "03-数据/基准-v1/audit.json",
+      "sha256": "f5314ee49c820b75e8460e214fa24c30aa3c3d554c8db9d7dcdb2aa09e9ad1c9"
+    },
+    {
+      "path": "03-数据/基准-v1/README.md",
+      "sha256": "de8e47490888b1f66e1e904060c2ae61f2f37b1c2475ec97756602193696804f"
+    },
+    {
+      "path": "04-研究/freeze_data_baseline.py",
+      "sha256": "fffa2f273c11be55316cfac69e6a3eee7d7b0cc6af56cd6472dfbf24df641f7a"
+    },
+    {
+      "path": "04-研究/verify_data_baseline.py",
+      "sha256": "15c19d715c660780707d2d5392739d0f6415092689cf5fb5e2bd6c5af0d42b9a"
+    }
+  ],
+  "urls": {
+    "production": "https://p2schedgen.fernuni-hagen.de/fileadmin/ess/uploads_p2schedgen/SMT2020/SMT2020.zip",
+    "amhs": "https://github.com/kwoo-lee/SMAT2022"
+  },
+  "amhs_commit": "a6df7fef99745fa49cf347306abaeb4b19002169",
+  "release_selection": [
+    "Lotrelease - variable due dates",
+    "Lotrelease - Engineering"
+  ],
+  "toolgroup_aliases": {
+    "DefMEt_FE_118": "DefMet_FE_118"
+  },
+  "release_engineering_route_override": "Product_1/2/3 engineering rows map to E1/E2/E3 according to Lotrelease summary; raw value preserved",
+  "virtual_group": "Delay_32 is not a physical equipment group; retain source operations for later buffer semantics",
+  "internal_units": {
+    "time": "second",
+    "distance": "metre",
+    "wafer_quantity": "wafer",
+    "batch_capacity": "wafer"
+  },
+  "unresolved_simulation_fields": [
+    "spatial length units confirmation",
+    "Rail.MAX_SPEED unit/interpretation",
+    "curved rail arc geometry",
+    "OHT loading/unloading duration",
+    "ZCU exact runtime semantics",
+    "stocker and track buffer operating rules",
+    "equipment process loading/unloading and cascade overlap",
+    "failure interruption policy"
+  ],
+  "status": "source_data_frozen; simulation_semantics_not_yet_ready"
+}
